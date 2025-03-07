@@ -96,6 +96,10 @@
         "command": "web-preview.sendScreenshot",
         "title": "Send Tab Screenshot to Composer",
         "category": "Composer Web"
+      },
+      {
+        "command": "screenshot-to-chat.checkClipboardForScreenshot",
+        "title": "Check Clipboard for Screenshot"
       }
     ],
     "keybindings": [
@@ -128,6 +132,12 @@
         "key": "ctrl+shift+'",
         "mac": "cmd+shift+'",
         "when": "editorFocus"
+      },
+      {
+        "command": "screenshot-to-chat.checkClipboardForScreenshot",
+        "key": "shift+2",
+        "mac": "cmd+shift+2",
+        "when": "editorTextFocus || terminalFocus"
       }
     ],
     "menus": {

@@ -100,7 +100,7 @@ export class ComposerIntegration {
         }
 
         if ((!screenshot || imageSuccess) && (!formattedLogs || textSuccess)) {
-          await this.showSuccessNotification();
+          // await this.showSuccessNotification();
           return;
         }
       } catch (error) {
@@ -158,14 +158,15 @@ export class ComposerIntegration {
     await delay(50);
   }
 
-  private async showSuccessNotification() {
-    await this.toastService.showProgress(
-      "Successfully sent to Composer",
-      async () => {
-        await delay(2000);
-      }
-    );
-  }
+  // Commented out since success notifications are no longer used
+  // private async showSuccessNotification() {
+  //   await this.toastService.showProgress(
+  //     "Successfully sent to Composer", 
+  //     async () => {
+  //       await delay(2000);
+  //     }
+  //   );
+  // }
 
   private formatLogs(logs: LogData): string {
     let result = " ";

@@ -9,7 +9,6 @@ Instantly send screenshots to your Cursor chat window. No more dragging screensh
 
 - MacOS (only available on Mac for now)
 - Node.js 18.0.0 or higher
-- Cursor IDE installed
 
 ## Quick Setup
 
@@ -54,3 +53,5 @@ If your screenshots aren't showing up:
 ## Found a Bug?
 
 Open an issue on [GitHub repository](https://github.com/malekai-gauntlet/screenshot) - I'd love to hear your feedback!
+
+Special thanks to @saketsarin on GitHub for the helpful OS tools.
