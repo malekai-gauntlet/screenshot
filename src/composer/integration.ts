@@ -172,7 +172,7 @@ export class ComposerIntegration {
   }
 
   private formatLogs(logs: LogData): string {
-    let result = "---Console Logs---\n";
+    let result = " ";
     logs.console.forEach((log) => {
       const timestamp = new Date(log.timestamp).toLocaleTimeString();
       let prefix = "";

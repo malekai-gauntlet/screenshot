@@ -82,11 +82,7 @@ export class SystemScreenshotMonitor {
             await this.composerIntegration.sendToComposer(
               imageBuffer,
               {
-                console: [{
-                  timestamp: Date.now(),
-                  type: 'screenshot',
-                  args: ['Screenshot captured']
-                }],
+                console: [],
                 network: []
               }
             );
