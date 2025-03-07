@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import { exec } from 'child_process';
 import { ComposerIntegration } from '../composer/integration';
 import { verifyClipboardContent, delay } from '../utils/clipboard';
 
@@ -45,14 +46,41 @@ export class SystemScreenshotMonitor {
             const tmpDir = path.join(__dirname, '..', '..', 'tmp');
             await fs.mkdir(tmpDir, { recursive: true });
             
+            // Save current clipboard image to temp file
+            const tmpFilePath = path.join(tmpDir, `screenshot-${Date.now()}.png`);
+            await new Promise<void>((resolve, reject) => {
+              const platform = process.platform;
+              let command = '';
+              
+              switch (platform) {
+                case 'darwin':
+                  command = `pngpaste "${tmpFilePath}"`;
+                  break;
+                case 'win32':
+                  command = `powershell -command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Clipboard]::GetImage().Save('${tmpFilePath}')"`;
+                  break;
+                case 'linux':
+                  command = `xclip -selection clipboard -t image/png -o > "${tmpFilePath}"`;
+                  break;
+              }
+              
+              exec(command, (error) => {
+                if (error) reject(error);
+                else resolve();
+              });
+            });
+
+            // Read the image file as buffer
+            const imageBuffer = await fs.readFile(tmpFilePath);
+            
             // Open Composer panel
             await vscode.commands.executeCommand(
               "workbench.panel.composerViewPane2.resetViewContainerLocation"
             );
             
-            // The image is already in clipboard, so we can send it directly to Composer
+            // Send to Composer using the existing pipeline
             await this.composerIntegration.sendToComposer(
-              undefined, // No need to pass buffer, it will use clipboard
+              imageBuffer,
               {
                 console: [{
                   timestamp: Date.now(),
@@ -62,6 +90,9 @@ export class SystemScreenshotMonitor {
                 network: []
               }
             );
+            
+            // Cleanup temp file
+            await fs.unlink(tmpFilePath).catch(console.error);
             
             console.log('Screenshot processed successfully');
             await delay(200); // Small delay to prevent duplicate processing
