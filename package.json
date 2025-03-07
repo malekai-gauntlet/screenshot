@@ -1,9 +1,9 @@
 {
   "name": "screenshot-to-chat",
-  "displayName": "Screenshot To Chat",
-  "description": "Instantly send screenshots to your cursor chat window. No more dragging screenshotsfrom your desktop.",
-  "version": "1.0.0",
-  "publisher": "cursor",
+  "displayName": "Screenshot To Cursor Chat",
+  "description": "Instantly send screenshots to your Cursor chat window. No more dragging screenshots from your desktop.",
+  "version": "1.0.1",
+  "publisher": "MalekaiMischke",
   "icon": "assets/icon.png",
   "private": false,
   "repository": {
@@ -19,14 +19,21 @@
     "capture",
     "clipboard",
     "chat",
-    "composer"
+    "composer",
+    "cursor",
+    "productivity",
+    "automation",
+    "image",
+    "screen capture"
   ],
   "engines": {
     "vscode": "1.96.2",
     "node": ">=18.0.0"
   },
   "categories": [
-    "Other"
+    "Other",
+    "Snippets",
+    "Visualization"
   ],
   "activationEvents": [
     "onStartupFinished"
