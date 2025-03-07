@@ -135,11 +135,7 @@ export class ComposerIntegration {
       tmpFile = tmpFilePath;
 
       await copyImageToClipboard(tmpFile);
-      await delay(50);
-      await vscode.commands.executeCommand(
-        "editor.action.clipboardPasteAction"
-      );
-      await delay(50);
+      await vscode.commands.executeCommand("editor.action.clipboardPasteAction");
     } catch (error) {
       throw new Error(`Failed to send image: ${error}`);
     } finally {
