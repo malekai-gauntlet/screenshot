@@ -3,7 +3,7 @@ import * as fs from "fs/promises";
 import * as path from "path";
 import { exec } from "child_process";
 import { ComposerIntegration } from "../composer/integration";
-import { verifyClipboardContent, delay } from "../utils/clipboard";
+import { verifyClipboardContent, delay, clearClipboard } from "../utils/clipboard";
 
 export class SystemScreenshotMonitor {
   private static instance: SystemScreenshotMonitor;
@@ -81,14 +81,11 @@ export class SystemScreenshotMonitor {
             // Send to Composer using the existing pipeline
             await this.composerIntegration.sendToComposer(
               imageBuffer,
-              {
-                console: [],
-                network: []
-              }
+              undefined  // No need for logs at all now
             );
             
-            // Cleanup temp file
-            await fs.unlink(tmpFilePath).catch(console.error);
+            // Clear clipboard after successful send
+            await clearClipboard();
             
             console.log("Screenshot processed successfully");
             await delay(200); // Small delay to prevent duplicate processing
