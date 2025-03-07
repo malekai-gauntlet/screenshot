@@ -13,7 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
     composerIntegration
   );
   const toastService = ToastService.getInstance();
-  const screenshotMonitor = SystemScreenshotMonitor.getInstance(composerIntegration);
+  SystemScreenshotMonitor.getInstance(composerIntegration);
 
   context.subscriptions.push(
     vscode.commands.registerCommand("web-preview.smartCapture", () =>
