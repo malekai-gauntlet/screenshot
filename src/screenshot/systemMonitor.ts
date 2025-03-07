@@ -1,9 +1,9 @@
-import * as vscode from 'vscode';
-import * as fs from 'fs/promises';
-import * as path from 'path';
-import { exec } from 'child_process';
-import { ComposerIntegration } from '../composer/integration';
-import { verifyClipboardContent, delay } from '../utils/clipboard';
+import * as vscode from "vscode";
+import * as fs from "fs/promises";
+import * as path from "path";
+import { exec } from "child_process";
+import { ComposerIntegration } from "../composer/integration";
+import { verifyClipboardContent, delay } from "../utils/clipboard";
 
 export class SystemScreenshotMonitor {
   private static instance: SystemScreenshotMonitor;
@@ -23,7 +23,7 @@ export class SystemScreenshotMonitor {
     this.statusBarItem.text = "$(device-camera) Screenshot Monitor: Active";
     this.statusBarItem.show();
     
-    console.log('Screenshot monitor activated'); // Startup log
+    console.log("Screenshot monitor activated"); // Startup log
     
     // Monitor clipboard for screenshots
     setInterval(async () => {
@@ -39,27 +39,27 @@ export class SystemScreenshotMonitor {
           
           // Only process if this is a new clipboard content (within last second)
           if (currentTime - this.lastCheckTime > 800) {
-            console.log('New screenshot detected');
+            console.log("New screenshot detected");
             this.lastCheckTime = currentTime;
             
             // Create temp directory if it doesn't exist
-            const tmpDir = path.join(__dirname, '..', '..', 'tmp');
+            const tmpDir = path.join(__dirname, "..", "..", "tmp");
             await fs.mkdir(tmpDir, { recursive: true });
             
             // Save current clipboard image to temp file
             const tmpFilePath = path.join(tmpDir, `screenshot-${Date.now()}.png`);
             await new Promise<void>((resolve, reject) => {
               const platform = process.platform;
-              let command = '';
+              let command = "";
               
               switch (platform) {
-                case 'darwin':
+                case "darwin":
                   command = `pngpaste "${tmpFilePath}"`;
                   break;
-                case 'win32':
+                case "win32":
                   command = `powershell -command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Clipboard]::GetImage().Save('${tmpFilePath}')"`;
                   break;
-                case 'linux':
+                case "linux":
                   command = `xclip -selection clipboard -t image/png -o > "${tmpFilePath}"`;
                   break;
               }
@@ -90,14 +90,14 @@ export class SystemScreenshotMonitor {
             // Cleanup temp file
             await fs.unlink(tmpFilePath).catch(console.error);
             
-            console.log('Screenshot processed successfully');
+            console.log("Screenshot processed successfully");
             await delay(200); // Small delay to prevent duplicate processing
           }
         } catch (clipboardError) {
           // No image in clipboard, just continue
         }
       } catch (error) {
-        console.error('Error processing screenshot:', error);
+        console.error("Error processing screenshot:", error);
       } finally {
         this.isProcessing = false;
       }
