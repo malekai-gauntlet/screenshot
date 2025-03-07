@@ -61,6 +61,8 @@ export class CommandHandlers {
   }
 
   public async handleSendScreenshot(): Promise<void> {
+    // Commenting out old browser screenshot functionality
+    /*
     if (!this.browserMonitor.isPageConnected()) {
       this.toastService.showNoTabConnected();
       return;
@@ -94,6 +96,7 @@ export class CommandHandlers {
         this.toastService.showError(`Screenshot capture failed: ${msg}`);
       }
     }
+    */
   }
 
   private async handleConnect(): Promise<void> {

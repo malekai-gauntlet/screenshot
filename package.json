@@ -70,6 +70,11 @@
     },
     "commands": [
       {
+        "command": "web-preview.captureSystemScreenshot",
+        "title": "Capture System Screenshot",
+        "category": "Composer Web"
+      },
+      {
         "command": "web-preview.smartCapture",
         "title": "Capture/Connect Browser Tab",
         "category": "Composer Web"
@@ -91,6 +96,12 @@
       }
     ],
     "keybindings": [
+      {
+        "command": "web-preview.captureSystemScreenshot",
+        "key": "ctrl+shift+cmd+4",
+        "mac": "ctrl+shift+cmd+4",
+        "when": "editorTextFocus"
+      },
       {
         "command": "web-preview.smartCapture",
         "key": "ctrl+;",
@@ -180,7 +191,7 @@
   "devDependencies": {
     "@types/mocha": "^9.1.1",
     "@types/node": "^16.18.0",
-    "@types/vscode": "^1.96.0",
+    "@types/vscode": "^1.98.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "@vscode/test-electron": "^2.3.8",

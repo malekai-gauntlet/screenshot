@@ -3,6 +3,7 @@ import { ComposerIntegration } from "./composer/integration";
 import { BrowserMonitor } from "./browser/monitor";
 import { CommandHandlers } from "./commands";
 import { ToastService } from "./utils/toast";
+import { SystemScreenshotMonitor } from "./screenshot/systemMonitor";
 
 export function activate(context: vscode.ExtensionContext) {
   const composerIntegration = ComposerIntegration.getInstance(context);
@@ -12,6 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
     composerIntegration
   );
   const toastService = ToastService.getInstance();
+  const screenshotMonitor = SystemScreenshotMonitor.getInstance(composerIntegration);
 
   context.subscriptions.push(
     vscode.commands.registerCommand("web-preview.smartCapture", () =>
