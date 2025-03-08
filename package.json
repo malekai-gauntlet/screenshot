@@ -1,8 +1,8 @@
 {
   "name": "screenshot-to-chat",
-  "displayName": "Screenshot To Cursor Chat",
+  "displayName": "Screenshot to Cursor Chat",
   "description": "Instantly send screenshots to your Cursor chat window. No more dragging screenshots from your desktop.",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "publisher": "MalekaiMischke",
   "icon": "assets/icon.png",
   "private": false,
